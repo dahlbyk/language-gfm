@@ -153,6 +153,9 @@ describe "GitHub Flavored Markdown grammar", ->
     {tokens} = grammar.tokenizeLine("<a href='_blank'>not italic</a>")
     expect(tokens[0]).toEqual value: "<a href='_blank'>not italic</a>", scopes: ["source.gfm"]
 
+    {tokens} = grammar.tokenizeLine("_search_form.html.erb. _search_form.html.erb. _search_form.html.erb")
+    expect(tokens[0]).toEqual value: "_search_form.html.erb. _search_form.html.erb. _search_form.html.erb", scopes: ["source.gfm"]
+
     [firstLineTokens, secondLineTokens] = grammar.tokenizeLines("this is _ita\nlic_!")
     expect(firstLineTokens[0]).toEqual value: "this is ", scopes: ["source.gfm"]
     expect(firstLineTokens[1]).toEqual value: "_", scopes: ["source.gfm", "markup.italic.gfm"]
